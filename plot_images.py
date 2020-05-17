@@ -28,6 +28,7 @@ def plot_multiple_images(nrows, ncols, data, target=None, image_shape=None, figs
             sp.axis("off")
         else:
             sp.text(0.85, 0.05, str(y[i]), transform=sp.transAxes, color='navy')
+    if title: fig.suptitle(title)
     return(fig,axs)
 
 ##############################################################################
