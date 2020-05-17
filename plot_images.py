@@ -14,6 +14,22 @@ def plot_digits(height, width, data, target=None, image_shape=None, title=None):
             sp.text(0.85, 0.05, str(y[i]), transform=sp.transAxes, color='navy')
     return(fig,axs)
 
+
+#USE THIS ONE INSTEAD OF THE ABOVE FUNCTION
+def plot_multiple_images(nrows, ncols, data, target=None, image_shape=None, figsize=None, title=None, **kwargs):
+    image_shape = image_shape or ([int(len(data[0])**.5),]*2 if len(data[0].shape)==1 else data[0].shape)
+    figsize = figsize or (ncols,nrows)
+    fig, axs = plt.subplots(nrows=nrows, ncols=ncols, figsize=figsize,
+                            subplot_kw={'xticks':[], 'yticks':[]},
+                            gridspec_kw=dict(hspace=0.1, wspace=0.1))
+    for (i,sp) in enumerate(axs.flat):
+        sp.imshow(data[i].reshape(*image_shape), **kwargs)
+        if target is None:
+            sp.axis("off")
+        else:
+            sp.text(0.85, 0.05, str(y[i]), transform=sp.transAxes, color='navy')
+    return(fig,axs)
+
 ##############################################################################
 
 from sklearn.datasets import load_digits
